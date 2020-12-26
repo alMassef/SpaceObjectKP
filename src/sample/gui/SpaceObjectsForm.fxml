@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="547.0" prefWidth="342.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.gui.SpaceObjectsFormController">
+    <children>
+        <ChoiceBox fx:id="cmbSpaceObjectType" layoutX="26.0" layoutY="14.0" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="291.0" />
+        <Label layoutX="14.0" layoutY="102.0" prefHeight="38.0" prefWidth="87.0" text="Удаленность от земли" wrapText="true">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
+        <TextField fx:id="txtDistanceFromTheEarth" layoutX="112.0" layoutY="102.0" prefHeight="25.0" prefWidth="149.0" />
+        <Button layoutX="14.0" layoutY="495.0" mnemonicParsing="false" onAction="#onSaveClick" text="Сохранить">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <Button layoutX="250.0" layoutY="495.0" mnemonicParsing="false" onAction="#onCancelClick" text="Отмена">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Button>
+        <VBox layoutX="14.0" layoutY="155.0" prefHeight="304.0" prefWidth="315.0">
+            <children>
+                <VBox fx:id="planetPane" prefHeight="94.0" prefWidth="315.0">
+                    <children>
+                        <HBox prefHeight="32.0" prefWidth="205.0">
+                            <children>
+                                <Label prefHeight="25.0" prefWidth="89.0" text="Радиус" wrapText="true">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtRadius" prefHeight="25.0" prefWidth="120.0" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="28.0" prefWidth="205.0">
+                            <children>
+                                <CheckBox fx:id="chkPresenceOfAtmosphere" mnemonicParsing="false" prefHeight="19.0" prefWidth="129.0" text="Атмосфера есть">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </CheckBox>
+                            </children>
+                        </HBox>
+                  <HBox prefHeight="30.0" prefWidth="315.0">
+                     <children>
+                        <Label prefHeight="19.0" prefWidth="52.0" text="Масса">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtM" />
+                     </children>
+                  </HBox>
+                    </children>
+                </VBox>
+                <VBox fx:id="starPane" prefHeight="120.0" prefWidth="193.0">
+                    <children>
+                        <HBox prefHeight="39.0" prefWidth="193.0">
+                            <children>
+                                <Label prefHeight="25.0" prefWidth="88.0" text="Плотность" wrapText="true">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtDensity" prefHeight="25.0" prefWidth="129.0" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="39.0" prefWidth="193.0">
+                            <children>
+                                <Label prefHeight="25.0" prefWidth="87.0" text="Цвет" wrapText="true">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <ChoiceBox fx:id="cmbColor" prefHeight="25.0" prefWidth="129.0" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="34.0" prefWidth="193.0">
+                            <children>
+                                <Label prefHeight="26.0" prefWidth="86.0" text="Температура" wrapText="true">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtTemperature" prefHeight="25.0" prefWidth="129.0" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <VBox fx:id="cometPane" prefHeight="91.0" prefWidth="280.0">
+                    <children>
+                        <HBox prefHeight="48.0" prefWidth="280.0">
+                            <children>
+                                <Label prefHeight="41.0" prefWidth="165.0" text="Период прохождения через солнечную систему" wrapText="true">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtPeriodOfPassageThroughTheSolarSystem" prefHeight="25.0" prefWidth="129.0" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="36.0" prefWidth="280.0">
+                            <children>
+                                <Label prefHeight="25.0" prefWidth="166.0" text="Скорость" wrapText="true">
+                                    <font>
+                                        <Font size="13.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="txtSpeed" prefHeight="25.0" prefWidth="129.0" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+      <Label layoutX="17.0" layoutY="61.0" prefHeight="19.0" prefWidth="81.0" text="Название">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtTitle" layoutX="112.0" layoutY="58.0" />
+    </children>
+</AnchorPane>
