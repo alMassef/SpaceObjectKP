@@ -60,6 +60,8 @@ public class MainFormController implements Initializable{
             return new SimpleStringProperty(cellData.getValue().getDescription());
         });
 
+
+
         // подцепляем столбцы к таблице
         mainTable.getColumns().addAll(titleColumn, distanceFromTheEarthColumn, descriptionColumn);
 

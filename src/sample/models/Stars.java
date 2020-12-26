@@ -1,5 +1,8 @@
 package sample.models;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.Alert;
+
 public class Stars extends SpaceObjects {
     public float density; // плотность г/см³
     public enum Color {red, yellow, blue, white;} // какие цвета бывают
@@ -40,7 +43,6 @@ public class Stars extends SpaceObjects {
         }
         String temperatureString = String.valueOf(this.temperature);
         String lightFlightTimeString = String.valueOf(this.lightFlightTime);
-
         return String.format("Плотность(г/см³): %s, Цвет: %s, Температура(C): %s, Время полета света(мин): %s", densityString, colorString, temperatureString, lightFlightTimeString);
     }
 }

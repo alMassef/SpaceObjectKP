@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,6 +50,9 @@ public class SpaceObjectsFormController implements Initializable {
     private TextField txtPeriodOfPassageThroughTheSolarSystem;
     @FXML
     private TextField txtSpeed;
+
+    @FXML
+    private Label labMasseg;
 
     public SpaceObjectModel spaceObjectsModel;
     private Integer id = null; // добавили поле под идентификатор
@@ -178,22 +182,30 @@ public class SpaceObjectsFormController implements Initializable {
 
     // обработчик нажатия на кнопку Сохранить
     public void onSaveClick(javafx.event.ActionEvent actionEvent) {
-        // проверяем передали ли идентификатор
-        if (this.id != null) {
-            // если передавали значит у нас редактирование
-            // собираем объект с формы
-            SpaceObjects spaceObjects = getSpaceObjects();
-            // подвязываем переданный идентификатор
-            spaceObjects.id = this.id;
-            // отправляем в модель на изменение
-            this.spaceObjectsModel.edit(spaceObjects);
-        } else {
-            // если у нас добавление, просто добавляем объект
-            this.spaceObjectsModel.add(getSpaceObjects());
-        }
+        try {
+            try {
+                // проверяем передали ли идентификатор
+                if (this.id != null) {
+                    // если передавали значит у нас редактирование
+                    // собираем объект с формы
+                    SpaceObjects spaceObjects = getSpaceObjects();
+                    // подвязываем переданный идентификатор
+                    spaceObjects.id = this.id;
+                    // отправляем в модель на изменение
+                    this.spaceObjectsModel.edit(spaceObjects);
+                } else {
+                    // если у нас добавление, просто добавляем объект
+                    this.spaceObjectsModel.add(getSpaceObjects());
+                }
 
-        // закрываем окно к которому привязана кнопка
-        ((Stage)((Node)actionEvent.getSource()).getScene().getWindow()).close();
+                // закрываем окно к которому привязана кнопка
+                ((Stage)((Node)actionEvent.getSource()).getScene().getWindow()).close();
+            } catch (NullPointerException e) {
+                labMasseg.setText("Пожалуйста введите все поля)");
+            }
+        } catch (NumberFormatException e) {
+            labMasseg.setText("Ой, кажется не правильно введены значения)");
+        }
     }
 
     // обработчик нажатия на кнопку Отмена
