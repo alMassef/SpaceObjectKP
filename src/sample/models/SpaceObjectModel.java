@@ -1,5 +1,9 @@
 package sample.models;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -91,5 +95,42 @@ public class SpaceObjectModel {
             );
             listener.dataChanged(filteredList);
         }
+    }
+
+    // метод который сохраняет данные в файл
+    public void saveToFile(String path) {
+        // открываем файл для чтения
+        try (Writer writer =  new FileWriter(path)) {
+            // создаем сериализатор
+            ObjectMapper mapper = new ObjectMapper();
+
+            mapper.writerFor(new TypeReference<ArrayList<SpaceObjects>>() { }) // указали какой тип ставим
+                    .withDefaultPrettyPrinter() // чтобы в файле все красиво печаталось
+                    .writeValue(writer, spaceObjectsList); // записываем данные списка в файл
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // метод в модели для чтения из файла
+    public void loadFromFile(String path){
+        try (Reader reader =  new FileReader(path)) {
+            // создаем сериализатор
+            ObjectMapper mapper = new ObjectMapper();
+
+            // читаем из файла
+            spaceObjectsList = mapper.readerFor(new TypeReference<ArrayList<SpaceObjects>>() { })
+                    .readValue(reader);
+
+            this.counter = spaceObjectsList.stream()
+                    .map(spaceObject -> spaceObject.id)
+                    .max(Integer::compareTo)
+                    .orElse(0) + 1;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // оповещаем что данные загрузились
+        this.emitDataChanged();
     }
 }

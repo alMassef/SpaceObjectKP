@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 public class MainFormController implements Initializable{
     public TableView mainTable;
     public ComboBox cmbSpaceObjectType;
+    public Label labMasseg;
     SpaceObjectModel spaceObjectsModel = new SpaceObjectModel(); // создали экземпляр класса модели
 
     // список с возможным набором значений
@@ -96,6 +97,7 @@ public class MainFormController implements Initializable{
         // реакция на переключения выбранного значения
         cmbSpaceObjectType.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             this.spaceObjectsModel.setSpaceObjectFilter((Class<? extends SpaceObjects>) newValue);
+            labMasseg.setText("");
         });
     }
 
@@ -119,6 +121,7 @@ public class MainFormController implements Initializable{
 
         // открываем окно и ждем пока его закроют
         stage.showAndWait();
+        labMasseg.setText("");
     }
 
     // кнопка редактирование
@@ -141,23 +144,53 @@ public class MainFormController implements Initializable{
 
         // открываем окно и ждем пока его закроют
         stage.showAndWait();
+        labMasseg.setText("");
     }
 
     // кнопка удаление
     public void onDeleteClick(ActionEvent actionEvent) {
-        // берем выбранный на форме объект
-        SpaceObjects spaceObjects = (SpaceObjects) this.mainTable.getSelectionModel().getSelectedItem();
+        try {
+            // берем выбранный на форме объект
+            SpaceObjects spaceObjects = (SpaceObjects) this.mainTable.getSelectionModel().getSelectedItem();
 
-        // выдаем подтверждающее сообщение
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Подтверждение");
-        alert.setHeaderText(String.format("Точно удалить %s?", spaceObjects.getTitle()));
+            // выдаем подтверждающее сообщение
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Подтверждение");
+            alert.setHeaderText(String.format("Точно удалить %s?", spaceObjects.getTitle()));
 
-        // если пользователь нажал OK
-        Optional<ButtonType> option = alert.showAndWait();
-        if (option.get() == ButtonType.OK) {
-            // удаляем строку из таблицы
-            spaceObjectsModel.delete(spaceObjects.id);
+            // если пользователь нажал OK
+            Optional<ButtonType> option = alert.showAndWait();
+            if (option.get() == ButtonType.OK) {
+                // удаляем строку из таблицы
+                spaceObjectsModel.delete(spaceObjects.id);
+                labMasseg.setText("");
+            }
+        } catch (NullPointerException e) {
+            labMasseg.setText("Запист не выбрана");
+        }
+    }
+
+    // кнопка сохранить
+    public void onSaveToFileClick(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Сохранить данные");
+        fileChooser.setInitialDirectory(new File("."));
+
+        File file = fileChooser.showSaveDialog(mainTable.getScene().getWindow());
+        if (file != null){
+            spaceObjectsModel.saveToFile("data.json");
+        }
+    }
+
+    // кнопка загрузить
+    public void onLoadFromFileClick(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Загрузить данные");
+        fileChooser.setInitialDirectory(new File("."));
+
+        File file = fileChooser.showOpenDialog(mainTable.getScene().getWindow());
+        if (file != null){
+            spaceObjectsModel.loadFromFile("data.json");
         }
     }
 }
