@@ -173,28 +173,4 @@ public class MainFormController implements Initializable{
             labMasseg.setText("Запист не выбрана");
         }
     }
-
-    // кнопка сохранить
-    public void onSaveToFileClick(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Сохранить данные");
-        fileChooser.setInitialDirectory(new File("."));
-
-        File file = fileChooser.showSaveDialog(mainTable.getScene().getWindow());
-        if (file != null){
-            spaceObjectsModel.saveToFile("data.json");
-        }
-    }
-
-    // кнопка загрузить
-    public void onLoadFromFileClick(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Загрузить данные");
-        fileChooser.setInitialDirectory(new File("."));
-
-        File file = fileChooser.showOpenDialog(mainTable.getScene().getWindow());
-        if (file != null){
-            spaceObjectsModel.loadFromFile("data.json");
-        }
-    }
 }

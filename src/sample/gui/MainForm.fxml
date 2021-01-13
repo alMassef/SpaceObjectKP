@@ -15,12 +15,6 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="Файл">
-            <items>
-              <MenuItem mnemonicParsing="false" onAction="#onSaveToFileClick" text="Сохранить" />
-                  <MenuItem mnemonicParsing="false" onAction="#onLoadFromFileClick" text="Загрузить" />
-            </items>
-          </Menu>
           <Menu mnemonicParsing="false" text="Данные">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#onAddClick" text="Добавить" />
