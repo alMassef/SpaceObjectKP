@@ -1,5 +1,7 @@
 package sample.models;
 
+import javafx.scene.image.ImageView;
+
 public class Comets extends SpaceObjects {
     public int speed; // скорость км/ч
     public int periodOfPassageThroughTheSolarSystem; // период прохождения через солнечную систему
@@ -7,8 +9,8 @@ public class Comets extends SpaceObjects {
 
     public Comets(){}
 
-    public Comets(String title, int distanceFromTheEarth, int periodOfPassageThroughTheSolarSystem, int speed) {
-        super(title, distanceFromTheEarth);
+    public Comets(String image, String title, int distanceFromTheEarth, int periodOfPassageThroughTheSolarSystem, int speed) {
+        super(image, title, distanceFromTheEarth);
         this.speed = speed;
         this.periodOfPassageThroughTheSolarSystem = periodOfPassageThroughTheSolarSystem;
         this.orbitLength = speed * 8766 * periodOfPassageThroughTheSolarSystem;

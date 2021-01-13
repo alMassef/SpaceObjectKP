@@ -1,5 +1,7 @@
 package sample.models;
 
+import javafx.scene.image.ImageView;
+
 public class Planets extends SpaceObjects {
     public int radius; // радиус км
     public int m; // масса кг
@@ -11,8 +13,8 @@ public class Planets extends SpaceObjects {
 
     public Planets(){}
 
-    public Planets(String title, int distanceFromTheEarth, int radius, Boolean presenceOfAtmosphere, int m) {
-        super(title, distanceFromTheEarth);
+    public Planets(String image, String title, int distanceFromTheEarth, int radius, Boolean presenceOfAtmosphere, int m) {
+        super(image, title, distanceFromTheEarth);
         this.radius = radius;
         this.presenceOfAtmosphere = presenceOfAtmosphere;
         this.m = m;

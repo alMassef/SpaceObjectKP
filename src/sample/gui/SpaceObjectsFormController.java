@@ -1,6 +1,7 @@
 package sample.gui;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -8,13 +9,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 import sample.models.*;
 
-import java.awt.event.ActionEvent;
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -25,6 +29,9 @@ public class SpaceObjectsFormController implements Initializable {
     private TextField txtTitle;
     @FXML
     private TextField txtDistanceFromTheEarth;
+    @FXML
+    private TextField txtUrl;
+
 
     @FXML
     private VBox planetPane;
@@ -125,21 +132,23 @@ public class SpaceObjectsFormController implements Initializable {
         String title = this.txtTitle.getText();
         int distanceFromTheEarth = Integer.parseInt(this.txtDistanceFromTheEarth.getText());
 
+        String img = this.txtUrl.getText();
+
         switch ((String)this.cmbSpaceObjectType.getValue()){
             case SPACE_OBJECT_PLANET:
                 int radius = Integer.parseInt(this.txtRadius.getText());
                 int m = Integer.parseInt(this.txtM.getText());
-                result = new Planets(title, distanceFromTheEarth, radius, this.chkPresenceOfAtmosphere.isSelected(), m);
+                result = new Planets(img, title, distanceFromTheEarth, radius, this.chkPresenceOfAtmosphere.isSelected(), m);
                 break;
             case SPACE_OBJECT_STAR:
                 float density = Float.parseFloat(this.txtDensity.getText());
                 int temperature = Integer.parseInt(this.txtTemperature.getText());
-                result = new Stars(title, distanceFromTheEarth, density, (Stars.Color)this.cmbColor.getValue(), temperature);
+                result = new Stars(img, title, distanceFromTheEarth, density, (Stars.Color)this.cmbColor.getValue(), temperature);
                 break;
             case SPACE_OBJECT_COMET:
                 int periodOfPassageThroughTheSolarSystem = Integer.parseInt(this.txtPeriodOfPassageThroughTheSolarSystem.getText());
                 int speed = Integer.parseInt(this.txtSpeed.getText());
-                result = new Comets(title, distanceFromTheEarth, periodOfPassageThroughTheSolarSystem, speed);
+                result = new Comets(img, title, distanceFromTheEarth, periodOfPassageThroughTheSolarSystem, speed);
                 break;
         }
         return result;
@@ -157,6 +166,7 @@ public class SpaceObjectsFormController implements Initializable {
 
         if (spaceObjects != null){
             // тут стандартное заполнение полей в соответствии с переданным объектом
+            this.txtUrl.setText(spaceObjects.getUrl());
             this.txtTitle.setText(spaceObjects.getTitle());
             this.txtDistanceFromTheEarth.setText(String.valueOf(spaceObjects.getDistanceFromTheEarth()));
 

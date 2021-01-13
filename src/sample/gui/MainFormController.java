@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -45,6 +46,9 @@ public class MainFormController implements Initializable{
 
         spaceObjectsModel.load(); // добавляем вызов метода загрузить данные
 
+        TableColumn<SpaceObjects, ImageView> imageColumn = new TableColumn<>("Изображение"); //////////////
+        imageColumn.setCellValueFactory(new PropertyValueFactory<>("image"));
+
         // создаем столбец, указываем что столбец преобразует SpaceObjects в String,
         // указываем заголовок колонки как "Название"
         TableColumn<SpaceObjects, String> titleColumn = new TableColumn<>("Название");
@@ -64,7 +68,7 @@ public class MainFormController implements Initializable{
 
 
         // подцепляем столбцы к таблице
-        mainTable.getColumns().addAll(titleColumn, distanceFromTheEarthColumn, descriptionColumn);
+        mainTable.getColumns().addAll(imageColumn, titleColumn, distanceFromTheEarthColumn, descriptionColumn);
 
         // привязали список
         cmbSpaceObjectType.setItems(spaceObjectTypes);

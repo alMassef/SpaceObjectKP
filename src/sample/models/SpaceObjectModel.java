@@ -2,10 +2,14 @@ package sample.models;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+
 
 public class SpaceObjectModel {
     ArrayList<SpaceObjects> spaceObjectsList = new ArrayList<>();
@@ -31,9 +35,14 @@ public class SpaceObjectModel {
     // метод, который будет имитировать загрузку данных
     public void load(){
         spaceObjectsList.clear();
-        this.add(new Planets("Земля", 0, 6371, true, 597200000), false);
-        this.add(new Stars("Солнце", 149500000, 1.41f, Stars.Color.yellow, 15700000), false);
-        this.add(new Comets("Галлея", 859750570, 75, 252000), false);
+
+        String img1 = "https://look.com.ua/pic/201209/240x320/look.com.ua-31701.jpg";
+        String img2 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEXG6V6ROWzx5ElgFU8o4S_sTwhshhlaNDxQ&usqp=CAU";
+        String img3 = "https://avatars.mds.yandex.net/get-zen_doc/108057/pub_5c137d7a86fd9e00aa0a8a2a_5c138418dab7be00aa983682/scale_1200";
+
+        this.add(new Planets(img1,"Земля", 0, 6371, true, 597200000), false);
+        this.add(new Stars(img2,"Солнце", 149500000, 1.41f, Stars.Color.yellow, 15700000), false);
+        this.add(new Comets(img3,"Галлея", 859750570, 75, 252000), false);
 
         this.emitDataChanged();
     }
@@ -56,7 +65,7 @@ public class SpaceObjectModel {
     // метод для редактирования
     public void edit(SpaceObjects spaceObjects) {
         // ищем объект в списке
-        for (int i = 0; i< this.spaceObjectsList.size(); ++i) {
+        for (int i = 0; i < this.spaceObjectsList.size(); ++i) {
             // чтобы id совпадал с id переданным форме
             if (this.spaceObjectsList.get(i).id == spaceObjects.id) {
                 // если нашли, то подменяем объект
@@ -70,7 +79,7 @@ public class SpaceObjectModel {
     // метод для удаления
     public void delete(int id)
     {
-        for (int i = 0; i< this.spaceObjectsList.size(); ++i) {
+        for (int i = 0; i < this.spaceObjectsList.size(); ++i) {
             if (this.spaceObjectsList.get(i).id == id) {
                 this.spaceObjectsList.remove(i);
                 break;

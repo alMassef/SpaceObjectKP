@@ -2,6 +2,7 @@ package sample.models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
 
 public class Stars extends SpaceObjects {
     public float density; // плотность г/см³
@@ -14,8 +15,8 @@ public class Stars extends SpaceObjects {
 
     public Stars(){}
 
-    public Stars(String title, int distanceFromTheEarth, float density, Color color, int temperature) {
-        super(title, distanceFromTheEarth);
+    public Stars(String image, String title, int distanceFromTheEarth, float density, Color color, int temperature) {
+        super(image, title, distanceFromTheEarth);
         this.density = density;
         this.color = color;
         this.temperature = temperature;
